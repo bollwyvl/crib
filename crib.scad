@@ -25,24 +25,6 @@ leg_height = 36 * inch;
 mattress_to_floor = leg_height - (mattress_to_top + mattress_depth);
 
 
-total_gridbeam = 0 * inch;
-
-total_gridbeam = total_gridbeam + beam_width;
-
-module bom_zbeam(len) {
-	total_gridbeam = total_gridbeam + (len * beam_width);
-	zBeam(len);
-}
-module bom_ybeam(len) {
-	total_gridbeam = total_gridbeam + (len * beam_width);
-	yBeam(len);
-}
-module bom_xbeam(len) {
-	total_gridbeam = total_gridbeam + (len * beam_width);
-	xBeam(len);
-}
-
-
 // the mattress
 translate([0, 0, mattress_to_floor]){
 	color("lightcyan") cube([mattress_width, mattress_length, mattress_depth]);
@@ -50,7 +32,7 @@ translate([0, 0, mattress_to_floor]){
 
 
 module leg() {
-	color("BurlyWood") bom_zbeam(leg_height / beam_width);
+	color("BurlyWood") zBeam(leg_height / beam_width);
 }
 
 leg_x1 = -beam_width;
@@ -65,11 +47,11 @@ translate([leg_x1, leg_y2, 0]) leg();
 
 
 module long_box_side() {
-	bom_ybeam(2 + (mattress_length / beam_width));
+	yBeam(2 + (mattress_length / beam_width));
 }
 
 module short_box_side() {
-	bom_xbeam(4 + (mattress_width / beam_width));
+	xBeam(4 + (mattress_width / beam_width));
 }
 
 module box(z) {
@@ -85,7 +67,7 @@ box(leg_height - (2 * beam_width));
 
 
 module slat_support() {
-	bom_ybeam((mattress_length / beam_width) - 2);
+	yBeam((mattress_length / beam_width) - 2);
 }
 
 translate([0, beam_width, mattress_to_floor]) {
@@ -96,7 +78,7 @@ translate([0, beam_width, mattress_to_floor]) {
 
 module slat() {
 	translate([0, -beam_width, mattress_to_floor + beam_width]) {
-		bom_zbeam(((mattress_to_top + mattress_depth) / beam_width) - 2);
+		zBeam(((mattress_to_top + mattress_depth) / beam_width) - 2);
 	}
 }
 
