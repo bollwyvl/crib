@@ -1,2 +1,3 @@
-ipython[notebook]
-solidpython
+ipython[all]
+-e git+https://github.com/bollwyvl/solidpython.git@ipython-frame-magic#egg=SolidPython
+ipytangle
